@@ -1,0 +1,252 @@
+<j:stylesheet xmlns:j="http://www.jdsl.com/" version="1.0">
+    <j:template id="template2">
+        Inside #template2. I was sent relative to the color: <j:value-of select="this.name" />.<br />
+    </j:template>
+
+    <j:template id="template3">
+        <j:param name="item" data-type="json"><![CDATA[
+        {"name":"magenta"}
+        ]]></j:param>
+
+        Inside #template3. I was sent with-param $item: <j:value-of select="$item.name" />
+    </j:template>
+
+    <j:template id="main">
+        <h2>attribute</h2>
+        <div class="test">
+            <div>
+                <j:attribute name="style">color:#FF00FF</j:attribute>
+                Expected output: magenta text.
+            </div>
+        </div>
+
+        <div class="test">
+            <div>
+                <j:attribute name="style">
+                    color:<j:value-of select="_.items[0].color" />
+                </j:attribute>
+                Expected output: red text.
+            </div>
+        </div>
+
+        <hr />
+
+        <h2>variable</h2>
+        <div class="test">
+            <j:variable name="first" select="_.items[0]" />
+            Should be red: <j:value-of select="$first.name" />
+        </div>
+        <div class="test">
+            <j:variable name="first" select="_.items[1]" />
+            Should be green: <j:value-of select="$first.name" />
+        </div>
+        <div class="test">
+            Should not exist:
+            <j:choose>
+                <j:case test="typeof $first !== 'undefined'">
+                    Exists
+                </j:case>
+                <j:case>
+                    Does not exist
+                </j:case>
+            </j:choose>
+        </div>
+
+        <hr />
+        
+        <h2>template, call-template, param, with-param</h2>
+        <div class="test">
+            Testing no-params:
+            <j:call-template rel="#template2" select="this.items[0]"></j:call-template>
+        </div>
+
+        <div class="test">
+            Testing fallback (magenta):
+            <j:call-template rel="#template3"></j:call-template>
+        </div>
+
+        <div class="test">
+            Testing with param (red):
+            <j:call-template rel="#template3">
+                <j:with-param name="item" select="this.items[0]" />
+            </j:call-template>
+        </div>
+
+        <div class="test">
+            Testing fallback (magenta):
+            <j:call-template rel="#template3"></j:call-template>
+        </div>
+
+        <hr />
+        
+        <h2>choose, case</h2>
+        <div class="test">
+            <j:choose>
+                <j:case test="false">
+                    This shouldn't appear
+                </j:case>
+                <j:case test="true">
+                    This should appear
+                </j:case>
+                <j:case>
+                    This is the fallback/default
+                </j:case>
+            </j:choose>
+        </div>
+
+        <hr />
+        
+        <h2>switch, case</h2>
+        <div class="test">
+            <j:switch select="true">
+                <j:case select="false">
+                    This shouldn't appear
+                </j:case>
+                <j:case select="true">
+                    This should appear
+                </j:case>
+                <j:case>
+                    This is the fallback/default
+                </j:case>
+            </j:switch>
+        </div>
+
+        <hr />
+        
+        <h2>comment</h2>
+        <div class="test">
+            Check HTML source: 
+            <j:comment>
+                This should be hidden
+            </j:comment>
+        </div>
+
+        <hr />
+        
+        <h2>element</h2>
+        <div class="test">
+            <j:element>
+                <j:attribute name="name">
+                    span
+                </j:attribute>
+                This should be surrounded in a SPAN.
+            </j:element>
+        </div>
+
+        <div class="test">
+            <j:element name="{_.items[0].name}">
+                This should be surrounded in a tag called &quot;<j:value-of select="_.items[0].name" />&quot;.
+            </j:element>
+        </div>
+
+        <hr />
+        
+        <h2>fallback</h2>
+        <div class="test">
+            <j:undefined>
+                <j:fallback>
+                    The fallback has occured for 'undefined'
+                </j:fallback>
+            </j:undefined>
+        </div>
+
+        <hr />
+
+        <h2>loop</h2>
+        <div class="test">
+            Loop 10 times
+            <ul>
+                <j:loop times="10" key="time">
+                    <li><j:value-of select="$time" /></li>
+                </j:loop>
+            </ul>
+        </div>
+
+        <hr />
+
+        <h2>for-each</h2>
+        <div class="test">
+            <j:for-each select="this.items" key="id" value="item">
+                <p>
+                    <j:attribute name="style">color:<j:value-of select="this.color" /></j:attribute>
+                    This colour is <j:value-of select="$item.name"></j:value-of>
+                </p>
+            </j:for-each>
+        </div>
+
+        <hr />
+
+        <h2>if</h2>
+        <div class="test">
+            <j:if test="true">
+                This should be written.
+            </j:if>
+        </div>
+
+        <div class="test">
+            <j:if test="false">
+                This should not be written.
+            </j:if>
+        </div>
+
+        <hr />
+
+        <h2>message, log</h2>
+        <div class="test">
+            Check console.log for messages.
+            <j:log level="log">This is a log message</j:log>
+            <j:log level="warn">This is a warn message</j:log>
+            <j:log level="debug">This is a debug message</j:log>
+            <j:log level="info">This is a info message</j:log>
+            <j:log level="error">This is a error message</j:log>
+            <j:log level="info" select="this"></j:log>
+        </div>
+
+        <hr />
+
+        <h2>sort</h2>
+        <div class="test">
+            Should be blue, green, red.
+            <j:for-each select="this.items" key="id" value="item">
+                <j:sort order="descending" sort-type="number" select="this.num"></j:sort>
+                <p>
+                    <j:attribute name="style">color:<j:value-of select="this.color" /></j:attribute>
+                    This colour is <j:value-of select="$item.name"></j:value-of>
+                </p>
+            </j:for-each>
+        </div>
+
+        <hr />
+
+        <h2>text</h2>
+        <div class="test">
+            <j:text>Strips all <strong>html</strong> tags</j:text>
+        </div>
+
+        <hr />
+
+        <h2>value-of</h2>
+        <div class="test">
+            Should be red: <j:value-of select="_.items[0].name" />
+        </div>
+
+        <hr />
+
+        <h2>script</h2>
+        <div class="test">
+            Check console.
+            <j:script>
+                console.log("j:script [passed]");
+            </j:script>
+        </div>
+
+        <hr />
+
+        <h2>attribute shortcutting</h2>
+        <div class="test">
+            <span style="{'color:'+_.items[0].color}">
+                This should be red.
+            </span>
+        </div>
+    </j:template>
+</j:stylesheet>

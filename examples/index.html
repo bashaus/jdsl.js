@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <title>JDSL</title>
+    </head>
+    <body>
+        <h1>JDSL</h1>
+        <div id="html-output"></div>
+        
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+        <script type="text/javascript" src="../src/jdsl.js"></script>
+        <link rel="stylesheet" type="text/jdsl" src="index.jdsl" />
+        <script type="text/javascript">
+            
+            (function($){
+                $(window).bind('jdsl-ready', function() {
+                    // Add data structure
+                    var myData = {"items":[
+                        {"color":"#C00", "num":1, "name":"red"},
+                        {"color":"#0C0", "num":2, "name":"green"},
+                        {"color":"#00C", "num":3, "name":"blue"}
+                    ]};
+
+                    // Run the transformation
+                    $("#html-output").jdsl({ template: '#main', data: myData });
+                    //$("#html-source").val($("#html-output").html());
+                });
+            })(jQuery);
+            
+        </script>
+    </body>
+</html>
