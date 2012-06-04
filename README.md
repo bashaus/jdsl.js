@@ -1,10 +1,10 @@
-h1. JDSL: JavaScript DOM Stylesheet Language
+# JDSL: JavaScript DOM Stylesheet Language
 
 JDSL is a stylsheet language (much like XSLT) which leverages JSON in the browser to provide client-side template rendering. The purpose of the language is to make transforming JSON responses from AJAX transactions easy to insert into a HTML page.
 
-h2. Project Details
+## Project Details
 
-h3. Licence
+### Licence
 
 Copyright (C) 2012, "Bashkim Isai":http://www.bashkim.com.au
 
@@ -17,15 +17,15 @@ The above copyright notice and this permission notice shall be included in all c
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-h3. Contributors
+### Contributors
 
 * @bashaus
 
 If you fork this project and create a pull request, don't forget to add your name to the end of list above. 
 
-h2. JDSL Elements
+## JDSL Elements
 
-h3. j:text
+### j:text
 
 This element contains literal text. Information in the children will be outputted as-is. It's best to use this with a CDATA child.
 
@@ -54,7 +54,7 @@ Hello, Fred.
 
 
 
-h3. j:value-of &amp; j:val
+### j:value-of &amp; j:val
 
 The value-of element is used to output a JavaScript or JSON variable. You can access the entire DOM from this element, or you can use a JavaScript object that you passed through. The elements j:value-of and j:val are synonymous.
 
@@ -74,7 +74,7 @@ Example:
 
 
 
-h3. j:variable
+### j:variable
 
 Declares a variable that can be used later as a shortcut to data. You can use the elements j:value-of and j:val to output a variable by preceeding the name of the variable with a dollar sign ($).
 
@@ -124,7 +124,7 @@ Example:
 
 
 
-h3. j:template &amp; j:param
+### j:template &amp; j:param
 
 A j:stylesheet contains one or more j:templates which form the basis for transforming JSON data into DOM elements. You can choose any name for your templates, but it is recommended that you make the name of your templates unique to any other element in your current website which is identified by the same ID.
 
@@ -165,7 +165,7 @@ Attributes: j:param
 
 
 
-h3. j:call-template -> j:with-param
+### j:call-template -> j:with-param
 
 Allows you to execute another template from inside another one. Both templates does not have to be in the same file. 
 
@@ -202,7 +202,7 @@ Hello, Fred.
 
 
 
-h3. j:if
+### j:if
 
 Simple conditional testing to decide whether a block should or should not be shown. The return from the test should result in a Boolean (true/false). If you would like to simulate an if/else statement, see j:choose.
 
@@ -236,7 +236,7 @@ Outputs:
 
 
 
-h3. j:choose -> j:case
+### j:choose -> j:case
 
 Similar to the function of j:if, but allows you to do an if/elseif/else statement.
 
@@ -285,7 +285,7 @@ Outputs:
 
 
 
-h3. j:switch -> j:case
+### j:switch -> j:case
 
 Conditional guard which evaluates a block depending on whether the select attribute of the "switch" matches the select attribute of a case. Use a case with no select attribute for a default value.
 
@@ -327,7 +327,7 @@ Outputs
 
 
 
-h3. j:comment
+### j:comment
 
 Allows you to insert a comment into the DOM. While XML comments are passed through 
 
@@ -358,7 +358,7 @@ Outputs:
 
 
 
-h3. j:element
+### j:element
 
 Allows the dynamic creation of an element.
 
@@ -384,7 +384,7 @@ Outputs:
 
 
 
-h3. j:attribute
+### j:attribute
 
 Allows you to dynamically assign attributes to an element. Although the j:attribute option is available, a better approach is to use "Attribute shortcutting".
 
@@ -434,7 +434,7 @@ Both examples output:
 
 
 
-h3. j:loop
+### j:loop
 
 A simple for-loop. Iterates over its child nodes for a pre-determined number of times.
 
@@ -458,7 +458,7 @@ Using JDSL:
 
 
 
-h3. j:for-each
+### j:for-each
 
 Iterates over an array.
 
@@ -491,7 +491,7 @@ Using JDSL:
 
 
 
-h3. j:sort
+### j:sort
 
 Is a child of j:for-each. Sorts an array before looping.
 
@@ -529,7 +529,7 @@ Using JDSL:
 
 
 
-h3. j:message &amp; j:log
+### j:message &amp; j:log
 
 Allows for easy debugging of JDSL through the browser console. The elements j:message and j:log are synonymous.
 
@@ -570,7 +570,7 @@ Using JDSL:
 </j:stylesheet>
 ```
 
-h3. j:script
+### j:script
 
 Executes a block of JavaScript. Gives you access to all variables and the current context.
 
@@ -591,7 +591,7 @@ Using JDSL:
 </j:stylesheet>
 ```
 
-h3. j:fallback
+### j:fallback
 
 Executed if its parent element is not valid.
 
@@ -612,9 +612,9 @@ Using JDSL:
 </j:stylesheet>
 ```
 
-h2. Advanced topics
+## Advanced topics
 
-h3. Attribute shortcutting
+### Attribute shortcutting
 
 To quickly assign dynamic attributes to an element, you can use attribute shortcutting. This is available on all elements (HTML elements and JDSL elements).
 
