@@ -23,6 +23,35 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 If you fork this project and create a pull request, don't forget to add your name to the end of list above. 
 
+## Dependencies
+
+JDSL does not require any external libraries to function.
+
+Although the examples provided have a jQuery interface, it is not required in order to get JDSL to work.
+
+## Compatibility
+
+### Microsoft Internet Explorer
+
+* Version 6: untested & unsupported
+* Version 7: tested & failed
+* Version 8: tested & passed
+* Version 9: tested & passed
+
+### Google Chrome
+
+* Versions before 18: untested but should probably work in most versions
+* Version 18: tested & passed
+
+### Mozilla Firefox
+
+* Versions before 10: untested but should probably work in most versions
+* Version 10: tested & passed
+
+## Examples
+
+See examples/index.html for an example of how all JDSL elements function.
+
 ## JDSL Elements
 
 ### j:text
